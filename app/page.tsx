@@ -1,8 +1,7 @@
 import React from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { Bell } from "lucide-react";
 import { Navbar } from "@/components/ui/navigation";
+import { AuthControls } from "@/components/ui/auth-controls";
 import { HeroSection } from "@/components/home/hero-section";
 import { CoursesSection } from "@/components/home/courses-section";
 
@@ -31,7 +30,7 @@ export default function Home() {
             ]}
             className="border-b border-neutral-100 px-6 sm:px-10"
             rightElement={
-              <div className="flex items-center gap-5">
+              <div className="flex items-center gap-4">
                 {/* Notification Bell */}
                 <button
                   type="button"
@@ -41,20 +40,8 @@ export default function Home() {
                   <Bell size={20} strokeWidth={2} className="text-neutral-700" />
                 </button>
 
-                {/* User Profile Avatar */}
-                <Link
-                  href="/my-learning"
-                  className="relative w-9 h-9 rounded-full overflow-hidden ring-1 ring-neutral-200 shadow-2xs hover:ring-primary-400 transition-all cursor-pointer block"
-                >
-                  <Image
-                    src="/avatar.jpg"
-                    alt="User profile"
-                    fill
-                    sizes="36px"
-                    priority
-                    className="object-cover"
-                  />
-                </Link>
+                {/* Clerk Auth Controls */}
+                <AuthControls />
               </div>
             }
           />
