@@ -55,9 +55,9 @@ export const lessonType = defineType({
     }),
     defineField({
       name: 'duration',
-      title: 'Duration',
-      type: 'string',
-      description: 'Formatted duration for display (e.g., "21m", "45m", "1h 28m")',
+      title: 'Duration (seconds)',
+      type: 'number',
+      description: 'Duration in seconds (e.g. 350 for 5m 50s)',
       validation: (rule) => rule.required().error('Lesson duration is required'),
     }),
     defineField({
@@ -105,8 +105,24 @@ export const lessonType = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'duration',
+      duration: 'duration',
       media: 'thumbnail',
+    },
+    prepare({ title, duration, media }) {
+      let subtitle: string | undefined
+      if (typeof duration === 'number') {
+        const mins = Math.floor(duration / 60)
+        const secs = duration % 60
+        subtitle = secs > 0 ? `${mins}m ${secs}s` : `${mins}m`
+      } else if (typeof duration === 'string') {
+        subtitle = duration
+      }
+
+      return {
+        title: title || 'Untitled Lesson',
+        subtitle,
+        media,
+      }
     },
   },
 })

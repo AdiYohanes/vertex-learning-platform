@@ -41,23 +41,39 @@ export const instructorType = defineType({
     }),
     defineField({
       name: 'expertise',
-      title: 'Expertise / Role',
-      type: 'string',
-      description: 'e.g., Principal Engineer, Next.js Core Contributor',
+      title: 'Expertise / Tags',
+      type: 'array',
+      of: [{ type: 'string' }],
+      options: {
+        layout: 'tags',
+      },
+      description: 'Key areas of expertise (e.g., Docker, Kubernetes, CI/CD, Next.js)',
     }),
     defineField({
       name: 'bio',
       title: 'Biography',
-      type: 'text',
-      rows: 4,
-      description: 'Brief biography of the instructor',
+      type: 'blockContent',
+      description: 'Brief biography of the instructor in Portable Text',
     }),
   ],
   preview: {
     select: {
       title: 'name',
-      subtitle: 'expertise',
+      expertise: 'expertise',
       media: 'photo',
+    },
+    prepare({ title, expertise, media }) {
+      const subtitle = Array.isArray(expertise)
+        ? expertise.join(', ')
+        : typeof expertise === 'string'
+          ? expertise
+          : undefined
+
+      return {
+        title: title || 'Untitled Instructor',
+        subtitle,
+        media,
+      }
     },
   },
 })
