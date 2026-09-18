@@ -62,7 +62,7 @@ async function seed() {
     _type: 'instructor',
     name: 'Sarah Chen',
     slug: { _type: 'slug', current: 'sarah-chen' },
-    expertise: 'Principal Frontend Architect & Next.js Core Contributor',
+    expertise: ['Frontend Architecture', 'Next.js', 'React Performance'],
     bio: 'Sarah is a staff software engineer with over 10 years of experience building large-scale React and Next.js applications.',
   })
 
@@ -71,7 +71,7 @@ async function seed() {
     _type: 'instructor',
     name: 'Alex Rivera',
     slug: { _type: 'slug', current: 'alex-rivera' },
-    expertise: 'Principal Cloud & Systems Architect',
+    expertise: ['Cloud Architecture', 'Kubernetes', 'Docker', 'DevOps'],
     bio: 'Alex specializes in Linux containers, Kubernetes cluster management, and cloud-native architecture.',
   })
 
